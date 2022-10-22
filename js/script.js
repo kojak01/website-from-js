@@ -1,5 +1,5 @@
-let zmienna = 12,
-zmienna1 = 13,
-zmienna2 = 14;
-
-console.log(zmienna + zmienna1 + zmienna2);
+'use strict';
+document.getElementById('test-button').addEventListener('click', function(){
+    const links = document.querySelectorAll('.titles a');
+    console.log('links:', links);
+});
