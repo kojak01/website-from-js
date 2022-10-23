@@ -28,11 +28,11 @@ const titleClickHandler = function(event){
     console.log(clickedElement);
   } 
   
-  const links = document.querySelectorAll('.titles a');
-  
+  /*const links = document.querySelectorAll('.titles a'); diagnosing a bug <3 empty NodeList
+  console.log(links);
   for(let link of links){
     link.addEventListener('click', titleClickHandler);
-  }
+  } */
 
 const optArticleSelector = '.post', // script settings in variables
 optTitleSelector = '.post-title',
@@ -69,3 +69,8 @@ function generateTitleLinks(){
 }
 
 generateTitleLinks();
+
+const links = document.querySelectorAll('.titles a'); //diagnosing a bug <3 empty NodeList
+for(let link of links){
+  link.addEventListener('click', titleClickHandler);
+}
