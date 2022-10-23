@@ -62,7 +62,10 @@ function generateTitleLinks(){
     const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '<span></a></li>';
     console.log(linkHTML);
     /* insert link into titleList */
+    //titleList.innerHTML = titleList.innerHTML + linkHTML;
+    html = html + linkHTML;
   }
+  titleList.innerHTML = html;
 }
 
 generateTitleLinks();
