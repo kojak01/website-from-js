@@ -1,4 +1,5 @@
-const Przycisk = document.getElementById('test-button').addEventListener('click', () => {
-  const links = document.querySelectorAll('.titles a');
-  console.log('linki ', links);
-})
+const links = document.querySelectorAll('.titles a');
+
+for(let link of links) {
+  console.log(link);
+}
