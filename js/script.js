@@ -33,7 +33,8 @@ const titleClickHandler = function(event){
  optArticleAuthorSelector =  '.post-author',
  optTagsListSelector = '.tags.list',
  optCloudClassCount = '5',
- optCloudClassPrefix = 'tag-size-';
+ optCloudClassPrefix = 'tag-size-',
+ optAuthorsListSelector = '.authors.list';
 
  function generateTitleLinks(customSelector = ''){
   /* [DONE] remove contents of titleList */
@@ -67,7 +68,7 @@ const calculateTagsParams = function(tags){
     min: '999999'
   };
   for(let tag in tags){
-    console.log(tag + ' is used ' + tags[tag] + ' times');
+    //console.log(tag + ' is used ' + tags[tag] + ' times');
     if(tags[tag] > params.max){
       params.max = tags[tag];
     } else if(tags[tag] < params.min){
@@ -124,7 +125,7 @@ function generateTags(){
   //console.log(allTags);*/
   /* [NEW] create variable for all links HTML code */
   const tagsParams = calculateTagsParams(allTags);
-  console.log('tagsParams:', tagsParams)
+  //console.log('tagsParams:', tagsParams)
   let allTagsHTML = '';
 
   /* [NEW] START LOOP: for each tag in allTags: */
@@ -181,7 +182,8 @@ function addClickListenersToTags(){
 addClickListenersToTags();
  
 function generateAuthors() {
-  
+  /* create a new variable allAuthors with an empty object */
+  let allAuthors = {};
   /* find all articles */
   const articles = document.querySelectorAll(optArticleSelector);
   /* START LOOP: for every article*/
@@ -196,10 +198,27 @@ function generateAuthors() {
     const linkHTML = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
     /* add generated code to html variable */
     html = html + linkHTML;
+    /* check if this link is NOT already in allTags */
+    if(!allAuthors[articleAuthor]) {
+      /* add tag to allTags object */
+      allAuthors[articleAuthor] = 1;
+      } else {
+        allAuthors[articleAuthor]++;
+      }
      /* insert HTML of all the links into the Authors wrapper */
     authorsList.innerHTML = html;
   };
-
+/* find list of tags in right column */
+const authorList = document.querySelector(optAuthorsListSelector);
+/* create variable for all links HTML*/
+let allAuthorsHTML = '';
+/* START LOOP: for each tag in allTags: */
+for(let author in allAuthors){
+  /*  generate code of a link and add it to allTagsHTML */
+  allAuthorsHTML += '<li><a href="#author-' + author + '"><span>' + author + ' (' + allAuthors[author] + ') ' + '</span></a></li>';
+}
+/*[NEW] add HTML from allTagsHTML to tagList */
+authorList.innerHTML = allAuthorsHTML;
 };
 
 generateAuthors();
