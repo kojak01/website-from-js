@@ -2,6 +2,7 @@
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
   articleTags: Handlebars.compile(document.querySelector('#template-article-tags').innerHTML),
+  articleAuthor: Handlebars.compile(document.querySelector('#template-article-author').innerHTML),
 }
 
 const opts = {
@@ -204,8 +205,10 @@ function generateAuthors() {
     let html = '';
     /* get tags from data-author attribute */
     const articleAuthor = article.getAttribute('data-author');
-     /* generate HTML of the link */
-    const linkHTML = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
+    /* generate HTML of the link */
+    const linkHTMLData = {id: articleAuthor, authors: articleAuthor};
+    const linkHTML = templates.articleAuthor(linkHTMLData);
+    //const linkHTML = '<a href="#author-' + articleAuthor + '">' + articleAuthor + '</a>';
     /* add generated code to html variable */
     html = html + linkHTML;
     /* check if this link is NOT already in allTags */
