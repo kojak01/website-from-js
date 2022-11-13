@@ -1,7 +1,7 @@
 'use strict';
 const templates = {
   articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
-  
+  articleTags: Handlebars.compile(document.querySelector('#template-article-tags').innerHTML),
 }
 
 const opts = {
@@ -110,7 +110,9 @@ function generateTags(){
   /* START LOOP: for each tag */
     for(let tag of articleTagsArray){
       /* generate HTML of the link */
-      const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
+      const linkHTMLData = {id: tag, tag: tag};
+      const linkHTML = templates.articleTags(linkHTMLData);
+      // const linkHTML = '<li><a href="#tag-' + tag +'">' + tag + '</a></li>';
       /* add generated code to html variable */
       html = html + linkHTML + ' ';
       /* [NEW] check if this link is NOT already in allTags */
