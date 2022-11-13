@@ -1,4 +1,9 @@
 'use strict';
+const templates = {
+  articleLink: Handlebars.compile(document.querySelector('#template-article-link').innerHTML),
+  
+}
+
 const opts = {
   AuthorsListSelector: '.authors.list',
   CloudClassPrefix: 'tag-size-',
@@ -50,7 +55,9 @@ const titleClickHandler = function(event){
   /* [DONE] find the title element */
   const articleTitle = article.querySelector(opts.TitleSelector).innerHTML;  
   /* [DONE] create HTML of the link */
-  const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+  // const linkHTML = '<li><a href="#' + articleId + '"><span>' + articleTitle + '</span></a></li>';
+  const linkHTMLData = {id: articleId, title: articleTitle};
+  const linkHTML = templates.articleLink(linkHTMLData);
   /* insert link into titleList */
   html = html + linkHTML;
   //console.log(html);
